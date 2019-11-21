@@ -1,4 +1,5 @@
-const App = function(){
+const App = function()
+{
     
     'use strict';
 
@@ -6,16 +7,17 @@ const App = function(){
     this.IS_DEV = 'true';
 };
 
-App.prototype.start = function(){
+App.prototype.start = function()
+{
 
 'use strict';
 
 //Scenes
-let scenes = [];
+let gameScenes = [];
 
-scenes.push(Boot);
-scenes.push(Preload);
-scenes.push(Menu);
+gameScenes.push(Boot);
+gameScenes.push(Preload);
+gameScenes.push(Menu);
 
 
 //Game config
@@ -25,9 +27,9 @@ const config = {
     title  : 'Room Designer',
     width  : 800,
     height : 600,
-    scene  : scenes,
+    scene  : gameScenes,
     backgroundColor : '#fff',
-}
+};
 
 //Game app
 
