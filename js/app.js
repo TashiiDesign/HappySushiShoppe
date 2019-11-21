@@ -11,11 +11,11 @@ App.prototype.start = function(){
 'use strict';
 
 //Scenes
-let gameScenes = [];
+let scenes = [];
 
-gameScenes.push(Boot);
-gameScenes.push(Preload);
-gameScenes.push(Menu);
+scenes.push(Boot);
+scenes.push(Preload);
+scenes.push(Menu);
 
 
 //Game config
