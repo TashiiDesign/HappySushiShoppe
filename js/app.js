@@ -25,7 +25,7 @@ const config = {
     title  : 'Room Designer',
     width  : 800,
     height : 600,
-    scene  : gameScenes,
+    scene  : scenes,
     backgroundColor : '#fff',
 }
 
