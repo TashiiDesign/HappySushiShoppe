@@ -177,11 +177,45 @@ function create() {
         menuClear.fillStyle('#fff', 1);
         menuClear.fillRect(0, 0, 800, 600);
 
-
+        world.start.visible = false;
         console.log('clicked')
 
         //X + = RIGHT / Y + = DOWN
         //X - = LEFT / Y - = UP
+
+        //INVISIBLE SUSHI
+        this.wrappedNigiriSM = game.add.image(0,0,'wrappedNigiriSM');
+
+        this.twoSushiSM = game.add.image(0,0,'2sushiSM');
+
+        this.sashimiSM = game.add.image(0,0, 'sashimiSM');
+
+        this.sixSushiSM = game.add.image(0,0, '6sushiSM');
+
+        this.threeSushiSM = game.add.image(0,0,'3sushiSM');
+
+        this.tamagoSM = game.add.image(0,0,'tamagoSM');
+
+        this.fishEggSM = game.add.image(0,0,'fishEggSM');
+
+        this.nigiriSM = game.add.image(0,0,'nigiriSM').setInteractive();
+
+        this.wrappedNigiriLG = game.add.image(0,0,'wrappedNigiriLG');
+
+        this.twoSushiLG = game.add.image(0,0,'2sushiLG');
+
+        this.sashimiLG = game.add.image(0,0, 'sashimiLG');
+
+        this.sixSushiLG = game.add.image(0,0, '6sushiLG');
+
+        this.threeSushiLG = game.add.image(0,0,'3sushiLG');
+
+        this.tamagoLG = game.add.image(0,0,'tamagoLG');
+
+        this.fishEggLG = game.add.image(0,0,'fishEggLG');
+
+        this.nigiriLG = game.add.image(0,0,'nigiriLG').setInteractive();
+
 
         this.gameSceneBg = game.add.image(400, 300, 'gameSceneBg');
         this.gameSceneBg.setOrigin(0.5);
@@ -198,7 +232,7 @@ function create() {
         this.sushiList = game.add.image(phaser.config.width / 2-290, phaser.config.height / 2+110, 'sushiList');
         this.sushiList.setOrigin(0.5);
 
-        this.bellServe = game.add.image(phaser.config.width / 2-50, phaser.config.height / 2+50, 'bellServe');
+        this.bellServe = game.add.image(phaser.config.width / 2-50, phaser.config.height / 2+50, 'bellServe').setInteractive();
         this.bellServe.setOrigin(0.5);
 
         this.orders1 = game.add.image(phaser.config.width / 2+220, phaser.config.height / 2-130, 'orders1');
@@ -224,70 +258,189 @@ function create() {
         // this.correct = game.add.image(phaser.config.width / 2, phaser.config.height / 2, 'correct');
         // this.correct.setOrigin(0.5);
 
-        
-
-        //PLACEHOLDER IMAGES
-
-        //ORDER ITEMS
-   
-
-
+        //SUSHI ARRAY
+        let sushiTypesSM = [this.nigiriSM, this.twoSushiSM, this.threeSushiSM, this.sixSushiSM, this.fishEggSM, this.sashimiSM, this.tamagoSM, this.wrappedNigiriSM  ];
+        // let sushiTypesLG = [this.nigiriLG, this.twoSushiLG, this.threeSushiLG, this.sixSushiLG, this.fishEggLG, this.sashimiLG, this.tamagoLG, this.wrappedNigiriLG  ]
+           // sushiTypesSM.forEach(s => {
+        //     game.add.image(500, 100, s.texture.key);
+        // });
 
         //SUSHI LIST ITEMS 
 
-        this.wrappedNigiriSM = game.add.image(phaser.config.width / 2-338, phaser.config.height / 2-22, 'wrappedNigiriSM');
-        this.wrappedNigiriSM.setOrigin(0.5);
+        let sushi0 = sushiTypesSM[0].texture.key;
+        let sushi1 = sushiTypesSM[1].texture.key;
+        let sushi2 = sushiTypesSM[2].texture.key;
+        let sushi3 = sushiTypesSM[3].texture.key;
+        let sushi4 = sushiTypesSM[4].texture.key;
+        let sushi5 = sushiTypesSM[5].texture.key;
+        let sushi6 = sushiTypesSM[6].texture.key;
+        let sushi7 = sushiTypesSM[7].texture.key;
 
-
-        this.twoSushiSM = game.add.image(phaser.config.width / 2-242, phaser.config.height / 2-22, '2sushiSM');
-        this.twoSushiSM.setOrigin(0.5);
-
-        this.sashimiSM = game.add.image(phaser.config.width / 2-338, phaser.config.height / 2+65, 'sashimiSM');
-        this.sashimiSM.setOrigin(0.5);
-
-        this.sixSushiSM = game.add.image(phaser.config.width / 2-242, phaser.config.height / 2+65, '6sushiSM');
-        this.sixSushiSM.setOrigin(0.5);
-
-        this.threeSushiSM = game.add.image(phaser.config.width / 2-338, phaser.config.height / 2+155, '3sushiSM');
-        this.threeSushiSM.setOrigin(0.5);
-
-        this.tamagoSM = game.add.image(phaser.config.width / 2-242, phaser.config.height / 2+155, 'tamagoSM');
-        this.tamagoSM.setOrigin(0.5);
-
-        this.fishEggSM = game.add.image(phaser.config.width / 2-338, phaser.config.height / 2+245, 'fishEggSM');
-        this.fishEggSM.setOrigin(0.5);
-
-        this.nigiriSM = game.add.image(phaser.config.width / 2-242, phaser.config.height / 2+245, 'nigiriSM').setInteractive();
-        this.nigiriSM.setOrigin(0.5);
-
-        let sushiTypesSM = [this.nigiriSM, this.twoSushiSM, this.threeSushiSM, this.sixSushiSM, this.fishEggSM, this.sashimiSM, this.tamagoSM, this.wrappedNigiriSM  ];
-       
-        let imageName = sushiTypesSM[getRandomInt(7)].texture.key;
-
-        game.add.image(500, 100, imageName);
-
-        // sushiTypesSM.forEach(s => {
-        //     game.add.image(500, 100, s.texture.key);
-        // });
         
-        function display(){
-            console.log(sushiTypesSM);
-        };
+        //SUSHI BOARD ITEMS 
 
+        // let sushiBoard0 = sushiTypesLG[0].texture.key;
+        // let sushiBoard1 = sushiTypesLG[1].texture.key;
+        // let sushiBoard2 = sushiTypesLG[2].texture.key;
+        // let sushiBoard3 = sushiTypesLG[3].texture.key;
+        // let sushiBoard4 = sushiTypesLG[4].texture.key;
+        // let sushiBoard5 = sushiTypesLG[5].texture.key;
+        // let sushiBoard6 = sushiTypesLG[6].texture.key;
+        // let sushiBoard7 = sushiTypesLG[7].texture.key;
 
+        this.sushi0 = game.add.image(phaser.config.width / 2-242, phaser.config.height / 2+245, sushi0).setInteractive(); 
+        this.sushi1 = game.add.image(phaser.config.width / 2-338, phaser.config.height / 2+245, sushi1).setInteractive();
+        this.sushi2 = game.add.image(phaser.config.width / 2-242, phaser.config.height / 2+155, sushi2).setInteractive();
+        this.sushi3 = game.add.image(phaser.config.width / 2-338, phaser.config.height / 2+155, sushi3).setInteractive();
+        this.sushi4 = game.add.image(phaser.config.width / 2-242, phaser.config.height / 2+65, sushi4).setInteractive();
+        this.sushi5 = game.add.image(phaser.config.width / 2-338, phaser.config.height / 2+65, sushi5).setInteractive();
+        this.sushi6 = game.add.image(phaser.config.width / 2-242, phaser.config.height / 2-22, sushi6).setInteractive();
+        this.sushi7 = game.add.image(phaser.config.width / 2-338, phaser.config.height / 2-22, sushi7).setInteractive();
 
-      
-        this.nigiriSM.on('pointerdown', nigiriClicked);
-        
-        function nigiriClicked(){
-                world.start.selected.angle = 45;
-        };
+        // this.sushi0.on('pointerdown', sushi0Select);
+        // this.sushi1.on('pointerdown', sushi1Selected);
 
-        if (nigiriClicked){
-            world.start.selected.angle = 0;
-        }else {
-            world.start.selected.angle = 45;
+        // function checkSelected(){
+        //     if (!clicked == true){
+        //         sushi0Selected();
+
+        //     }else {
+        //         game.image.destroy();
+        //     }
+        // }
+
+ 
+
+        // function sushi1Selected(){
+        //     game.add.image(phaser.config.width / 2, phaser.config.height / 2, sushiBoard1)
+        // }
+        //ORDER ITEMS
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
         }
+
+        //order1
+        let sushiRandom1 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom1);
+        let sushiRandom2 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom2);
+        let sushiRandom3 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom3);
+        let sushiRandom4 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom4);
+
+        //order2
+        let sushiRandom5 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom5);
+        let sushiRandom6 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom6);
+        let sushiRandom7 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom7);
+        let sushiRandom8 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom8);
+
+        //order3
+        let sushiRandom9 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom9);
+        let sushiRandom10 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom10);
+        let sushiRandom11 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom11);
+        let sushiRandom12 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom12);
+
+        game.add.image(phaser.config.width / 2+95, phaser.config.height / 2-220, sushiRandom1);
+        game.add.image(phaser.config.width / 2+180, phaser.config.height / 2-220, sushiRandom2);
+        game.add.image(phaser.config.width / 2+260, phaser.config.height / 2-220, sushiRandom3);
+        game.add.image(phaser.config.width / 2+340, phaser.config.height / 2-220, sushiRandom4);
+
+        game.add.image(phaser.config.width / 2+95, phaser.config.height / 2-135, sushiRandom5);
+        game.add.image(phaser.config.width / 2+180, phaser.config.height / 2-135, sushiRandom6);
+        game.add.image(phaser.config.width / 2+260, phaser.config.height / 2-135, sushiRandom7);
+        game.add.image(phaser.config.width / 2+340, phaser.config.height / 2-135, sushiRandom8);
+
+        game.add.image(phaser.config.width / 2+95, phaser.config.height / 2-45, sushiRandom9);
+        game.add.image(phaser.config.width / 2+180, phaser.config.height / 2-45, sushiRandom10);
+        game.add.image(phaser.config.width / 2+260, phaser.config.height / 2-45, sushiRandom11);
+        game.add.image(phaser.config.width / 2+340, phaser.config.height / 2-45, sushiRandom12);
+
+
+        let nigiriClicked = false;
+        let twoSushiClicked = false;
+        let threeSushiClicked = false;
+        let sixSushiClicked = false;
+        let fishEggClicked = false;
+        let tamagoClicked = false;
+        let wrappedNigiriClicked = false;
+        let sashimiClicked = false;
+      
+        this.sushi0.on('pointerdown', sushi0Clicked);
+        
+        function sushi0Clicked(){
+            nigiriClicked = true;
+            game.add.image(phaser.config.width / 2, phaser.config.height / 2+100, sushi0)
+            console.log(sushi0);
+            
+        };
+
+        this.sushi1.on('pointerdown', sushi1Clicked);
+        
+        function sushi1Clicked(){
+            twoSushiClicked = true;
+            game.add.image(phaser.config.width / 2+190, phaser.config.height / 2+170, sushi1)
+            console.log("sushi1clicked");
+        };
+
+        this.sushi2.on('pointerdown', sushi2Clicked);
+
+        function sushi2Clicked(){
+            threeSushiClicked = true;
+            game.add.image(phaser.config.width / 2, phaser.config.height / 2+180, sushi2)
+            console.log("sushi2clicked");
+        };
+
+        this.sushi3.on('pointerdown', sushi3Clicked);
+        
+        function sushi3Clicked(){
+            sixSushiClicked = true;
+            game.add.image(phaser.config.width / 2+200, phaser.config.height / 2+100, sushi3)
+            console.log("sushi3clicked");
+        };
+        
+        this.sushi4.on('pointerdown', sushi4Clicked);
+        
+        function sushi4Clicked(){
+            fishEggClicked = true;
+            game.add.image(phaser.config.width / 2+200, phaser.config.height / 2+100, sushi4)
+            console.log("sushi4clicked");
+        };
+
+        this.sushi5.on('pointerdown', sushi5Clicked);
+        
+        function sushi5Clicked(){
+            sashimiClicked = true;
+            game.add.image(phaser.config.width / 2+200, phaser.config.height / 2+100, sushi5)
+            console.log("sushi5clicked");
+        };
+
+        this.sushi6.on('pointerdown', sushi6Clicked);
+        
+        function sushi6Clicked(){
+            tamagoClicked = true;
+            game.add.image(phaser.config.width / 2+200, phaser.config.height / 2+100, sushi6)
+            console.log("sushi6clicked");
+        };
+
+        this.sushi7.on('pointerdown', sushi7Clicked);
+        
+        function sushi7Clicked(){
+            wrappedNigiriClicked = true;
+            game.add.image(phaser.config.width / 2+200, phaser.config.height / 2+100, sushi7)
+            console.log("sushi7clicked");
+        };
+
+
+        function isSushiClicked (boolean, sushiType){
+           
+
+         
+          }
+          
+       
+        // if (nigiriClicked){
+        //     world.start.selected.angle = 0;
+        // }else {
+        //     world.start.selected.angle = 45;
+        // }
 
     //   var nigiriClicked = this.nigiriSM.on('pointerdown', function(){
     //         world.start.nigiriSelected.angle = 45; 
@@ -298,36 +451,27 @@ function create() {
     //     }else{
     //         this.nigiriSelected.angle = 0; 
     //     }
+
+    this.bellServe.on('pointerdown', serveSushi);
+
+    function serveSushi(){
+        console.log('served');
+        isSushiClicked(nigiriClicked, sushi0)
+
+
+        
+        
+        // if(sushiRandom1 === sushi0 || sushiRandom2 === sushi0 || sushiRandom3 === sushi0 || sushiRandom4 === sushi0){
+        //     console.log("same")
+
+        // }else {
+        //     console.log("different")
+        // }
+
+    }
+        
       
-
-
-        //ON TABLE ITEMS
-
-        // this.largePH = game.add.image(phaser.config.width / 2+200, phaser.config.height / 2+100, 'largePH');
-        // this.largePH.setOrigin(0.5);
-
-        // this.largePH = game.add.image(phaser.config.width / 2+100, phaser.config.height / 2+130, 'largePH');
-        // this.largePH.setOrigin(0.5);
-
-    });
-
-    // this.timer = this.add.text(phaser.config.width / 2, phaser.config.height / 2, {
-    //     font: '60px Cute Font',
-    //     fill: 0xCCCCCC
-
-    // });
-    // this.timer.setOrigin(0.5);
-
-    // // timedEvent = this.time.addEvent({ delay: 2000, callback: onEvent, callbackScope: this });
-    // timedEvent = this.time.delayedCall(3000, onEvent, [], this);
-
-    // function timerUpdate (){
-    // this.timer.setText('Event.progress: ' + timedEvent.getProgress().toString().substr(0, 4));
-    //     }
-
-    // function onEvent (){
-    //  timerUpdate();
-    //     }
+ });
 
 }
 
@@ -345,9 +489,7 @@ function create() {
 //     game.paused = false;
 // }
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
+
 
 function update() {
     sushi.update();

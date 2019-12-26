@@ -35,6 +35,7 @@ class UI {
     hideLoadingText() {
         this.loadingText.visible = false;
     }
+    
 
 
 }
