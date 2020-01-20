@@ -5,49 +5,26 @@ class Audio {
 }
 
 class Sushi {
+    // constructor(name, index, boolean) {
+    //     this.name = name;
+    //     this.index = index;
+    //     this.clicked = boolean;
+
+    }
+
+    
+
+    // addImage(width, height, name){
+    //     game.add.image(phaser.config.width / width, phaser.config.height / height, name).setInteractive(); 
+    // }
+
+    
+class UI {
     constructor() {
 
-    }
 
-    update() {
-            
-    }
-
-}
-
-class UI {
-    constructor(value) {
-
-        
-        this.loadingText = game.add.text(phaser.config.width / 2, phaser.config.height / 2 +60 , 'Loading', {
-            font: '60px Cute Font',
-            fill: '#fff'
-        });
-        this.loadingText.setOrigin(0.5, 0.5);
-
-        this.scoreText = game.add.text(phaser.config.width / 2-200, phaser.config.height / 2+200, value, {
-            font: '50px Cute Font',
-            fill: '#fff'
-        });
        
         }
-
-   showLoadingText() {
-        this.loadingText.visible = true;
-    }
-
-    hideLoadingText() {
-        this.loadingText.visible = false;
-    }
-
-    showScoreText() {
-        this.scoreText.visible = true;
-    }
-
-    hideScoreText() {
-        this.scoreText.visible = false;
-    }
-
 
     
 

@@ -163,14 +163,9 @@ function create() {
 
     world = new World(game);
 
-    sushi = new Sushi();
+    // sushi = new Sushi();
     ui = new UI();
     audio = new Audio();
-
-    ui.showLoadingText();
-    ui.hideScoreText();
-
-    ui.hideLoadingText();
 
    
     world.start.on('pointerdown', function(){
@@ -183,27 +178,26 @@ function create() {
         world.start.visible = false;
         console.log('clicked')
 
-        ui.showScoreText(0);
 
         //X + = RIGHT / Y + = DOWN
         //X - = LEFT / Y - = UP
 
         //INVISIBLE SUSHI
-        this.wrappedNigiriSM = game.add.image(0,0,'wrappedNigiriSM');
+        this.wrappedNigiriSM = game.add.image(0,0,'wrappedNigiriSM').setVisible(false);
 
-        this.twoSushiSM = game.add.image(0,0,'2sushiSM');
+        this.twoSushiSM = game.add.image(0,0,'2sushiSM').setVisible(false);
 
-        this.sashimiSM = game.add.image(0,0, 'sashimiSM');
+        this.sashimiSM = game.add.image(0,0, 'sashimiSM').setVisible(false);
 
-        this.sixSushiSM = game.add.image(0,0, '6sushiSM');
+        this.sixSushiSM = game.add.image(0,0, '6sushiSM').setVisible(false);
 
-        this.threeSushiSM = game.add.image(0,0,'3sushiSM');
+        this.threeSushiSM = game.add.image(0,0,'3sushiSM').setVisible(false);
 
-        this.tamagoSM = game.add.image(0,0,'tamagoSM');
+        this.tamagoSM = game.add.image(0,0,'tamagoSM').setVisible(false);
 
-        this.fishEggSM = game.add.image(0,0,'fishEggSM');
+        this.fishEggSM = game.add.image(0,0,'fishEggSM').setVisible(false);
 
-        this.nigiriSM = game.add.image(0,0,'nigiriSM');
+        this.nigiriSM = game.add.image(0,0,'nigiriSM').setVisible(false);
 
         this.gameSceneBg = game.add.image(400, 300, 'gameSceneBg');
         this.gameSceneBg.setOrigin(0.5);
@@ -261,6 +255,8 @@ function create() {
         this.sushi6 = game.add.image(phaser.config.width / 2-242, phaser.config.height / 2-22, sushi6).setInteractive();
         this.sushi7 = game.add.image(phaser.config.width / 2-338, phaser.config.height / 2-22, sushi7).setInteractive();
 
+        this.sushiBoard0 = game.add.image(phaser.config.width / 2-242, phaser.config.height / 2+45, sushi0);
+
 
         //ORDER ITEMS
 
@@ -277,90 +273,92 @@ function create() {
         //     done = when randomSushiBucket has 4 items
         // }
 
-        let randomSushiBucket = [4];
-        let done;
-        while(!done) {
+        // let randomSushiBucket = [4];
+        // let done;
+        // while(!done) {
 
-            let itemNumber = getRandomInt(7);
+        //     let itemNumber = getRandomInt(7);
+        //     console.log(itemNumber);
 
-            if (randomSushiBucket !== itemNumber){
-                var sum = itemNumber + randomSushiBucket;
-            }
-            done = sum === 4;
-        }
+        //     if (randomSushiBucket !== itemNumber){
+        //         var sum = itemNumber + randomSushiBucket;
+        //         console.log(sum)
+        //     }
+            
+        // }
 
 
 
 
-        let sushiRandom1 = sushiTypesSM[randomSushiBucket[0]].texture.key;
-        let sushiRandom2 = sushiTypesSM[randomSushiBucket[1]].texture.key;
-        let sushiRandom3 = sushiTypesSM[randomSushiBucket[2]].texture.key;
-        let sushiRandom4 = sushiTypesSM[randomSushiBucket[3]].texture.key;
+        // let sushiRandom1 = sushiTypesSM[randomSushiBucket[0]].texture.key;
+        // let sushiRandom2 = sushiTypesSM[randomSushiBucket[1]].texture.key;
+        // let sushiRandom3 = sushiTypesSM[randomSushiBucket[2]].texture.key;
+        // let sushiRandom4 = sushiTypesSM[randomSushiBucket[3]].texture.key;
 
-        // let sushiRandom1 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom1);
-        // let sushiRandom2 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom2);
-        // let sushiRandom3 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom3);
-        // let sushiRandom4 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom4);
+        let sushiRandom1 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom1);
+        let sushiRandom2 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom2);
+        let sushiRandom3 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom3);
+        let sushiRandom4 = sushiTypesSM[getRandomInt(7)].texture.key;   console.log(sushiRandom4);
 
-        game.add.image(phaser.config.width / 2+95, phaser.config.height / 2-220, sushiRandom1);
-        game.add.image(phaser.config.width / 2+180, phaser.config.height / 2-220, sushiRandom2);
-        game.add.image(phaser.config.width / 2+260, phaser.config.height / 2-220, sushiRandom3);
-        game.add.image(phaser.config.width / 2+340, phaser.config.height / 2-220, sushiRandom4);
+        // game.add.image(phaser.config.width / 2+95, phaser.config.height / 2-220, sushiRandom1);
+        // game.add.image(phaser.config.width / 2+180, phaser.config.height / 2-220, sushiRandom2);
+        // game.add.image(phaser.config.width / 2+260, phaser.config.height / 2-220, sushiRandom3);
+        // game.add.image(phaser.config.width / 2+340, phaser.config.height / 2-220, sushiRandom4);
 
 
     
-        //order1
-        //no duplicates
+        // order1
+        // no duplicates
 
-        // function orderSet(){
+        function orderSet(){
        
-        // if (sushiRandom1 == sushiRandom2 || sushiRandom1 == sushiRandom3 || sushiRandom1 == sushiRandom4){
-        //     return getRandomInt()
-        //     console.log("same");
-        // } 
-        // else
-        // {
-        //     game.add.image(phaser.config.width / 2+95, phaser.config.height / 2-220, sushiRandom1);
-        //     console.log("different");
+        if (sushiRandom1 == sushiRandom2 || sushiRandom1 == sushiRandom3 || sushiRandom1 == sushiRandom4){
+            return getRandomInt()
+            console.log("same");
+        } 
+        else
+        {
+            game.add.image(phaser.config.width / 2+95, phaser.config.height / 2-220, sushiRandom1);
+            console.log("different");
 
-        // }
+        }
 
-        // if (sushiRandom2 == sushiRandom1 || sushiRandom2 == sushiRandom3 || sushiRandom2 == sushiRandom4){
-        //     return getRandomInt()
-        //     console.log("same");
-        // } 
-        // else
-        // {
+        if (sushiRandom2 == sushiRandom1 || sushiRandom2 == sushiRandom3 || sushiRandom2 == sushiRandom4){
+            return getRandomInt()
+            console.log("same");
+        } 
+        else
+        {
 
-        //     game.add.image(phaser.config.width / 2+180, phaser.config.height / 2-220, sushiRandom2);
-        //     console.log("different");
-        // }
+            game.add.image(phaser.config.width / 2+180, phaser.config.height / 2-220, sushiRandom2);
+            console.log("different");
+        }
 
-        // if (sushiRandom3 == sushiRandom1 || sushiRandom3 == sushiRandom2 || sushiRandom3 == sushiRandom4){
-        //     return getRandomInt()
-        //     console.log("same");
-        // } 
-        // else
-        // {
+        if (sushiRandom3 == sushiRandom1 || sushiRandom3 == sushiRandom2 || sushiRandom3 == sushiRandom4){
+            return getRandomInt()
+            console.log("same");
+        } 
+        else
+        {
 
-        //     game.add.image(phaser.config.width / 2+260, phaser.config.height / 2-220, sushiRandom3);
-        //     console.log("different");
-        // }
+            game.add.image(phaser.config.width / 2+260, phaser.config.height / 2-220, sushiRandom3);
+            console.log("different");
+        }
 
-        // if (sushiRandom4 == sushiRandom1 || sushiRandom4 == sushiRandom2 || sushiRandom4 == sushiRandom3){
-        //     return getRandomInt()
-        //     console.log("same");
-        // } 
-        // else
-        // {
+        if (sushiRandom4 == sushiRandom1 || sushiRandom4 == sushiRandom2 || sushiRandom4 == sushiRandom3){
+            return getRandomInt()
+            console.log("same");
+        } 
+        else
+        {
             
-        //     game.add.image(phaser.config.width / 2+340, phaser.config.height / 2-220, sushiRandom4);
-        //     console.log("different");
-        // }
+            game.add.image(phaser.config.width / 2+340, phaser.config.height / 2-220, sushiRandom4);
+            console.log("different");
+        }
         
-        // }
+        }
 
-        // orderSet();
+        orderSet();
 
 
         let nigiriClicked = false;
@@ -375,26 +373,28 @@ function create() {
         
         //X + = RIGHT / Y + = DOWN
         //X - = LEFT / Y - = UP
-      
+
+        var sushi0Board;
+
         this.sushi0.on('pointerdown', sushi0Clicked);
         
         function sushi0Clicked(){
             
             nigiriClicked = true;
 
-            game.add.image(phaser.config.width / 2, phaser.config.height / 2+100, sushi0).setVisible(true);
+            game.add.image(phaser.config.width / 2, phaser.config.height / 2+100, sushi0);
             
             console.log(sushi0);
             
-            
+        
         };
 
 
-        // for (sushi in sushiArray) { sushi.onClick()   }
-
+        for (sushi in sushiTypesSushi) { sushi.onClick()   }
 
         this.sushi1.on('pointerdown', sushi1Clicked);
-        
+
+
         function sushi1Clicked(){
             if (clicked == 3){
                 console.log("maximum reached")
@@ -403,7 +403,7 @@ function create() {
             else{
             
             twoSushiClicked = true;
-            let sushi1Board = game.add.image(phaser.config.width / 2+100, phaser.config.height / 2+170, sushi1)
+            game.add.image(phaser.config.width / 2+100, phaser.config.height / 2+170, sushi1)
             console.log("sushi1clicked");
             clicked++
             }
@@ -617,7 +617,6 @@ function create() {
 
         checkAnswers();
         
-        resetBoard();
 
     }
 
@@ -633,11 +632,6 @@ function resetSelection(){
     correct=0;
     clicked=0
 }
-
-// function resetBoard(){
-//     world.start.sushi1Board.destroy();
-    
-// }
 
 var clicked = 0;
 var correct = 0;
@@ -662,12 +656,6 @@ function checkAnswers(){
 
 
 
-function setScore(value) {
-    game.score = value;
-    ui.updateScoreText(value);
-}
-
-
 // function pauseGameForInput() {
 //     game.paused = true;
 
@@ -683,8 +671,7 @@ function setScore(value) {
 
 
 function update() {
-    sushi.update();
-
+   
     world.update();
     
     
