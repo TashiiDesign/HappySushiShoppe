@@ -5,6 +5,9 @@ let world;
 let input;
 let ui;
 let audio;
+let player;
+let score;
+let highscore;
 
 //Game config
 var config = {
@@ -14,7 +17,7 @@ var config = {
     width  : 800,
     height : 600,
     backgroundColor : '#fff',
-    scene  : [Preload, Menu, Game]
+    scene  : [Preload, Game, Paused, LeaderBoard]
     
 };
 

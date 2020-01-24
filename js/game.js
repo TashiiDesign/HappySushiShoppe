@@ -1,7 +1,7 @@
 class Game extends Phaser.Scene {
     constructor() {
       super("playGame");
-
+        
     }
 
   
@@ -21,7 +21,6 @@ class Game extends Phaser.Scene {
         var orders1 = this.load.image('orders1', '../assets/images/orders1.png');
         var sushiList = this.load.image('sushiList', '../assets/images/sushiList.png');
         var timeScore = this.load.image('timeScore', '../assets/images/timeScore.png');
-
         var pauseButton = this.load.image('pauseButton', '../assets/images/pauseButton.png')
         var wrong = this.load.image('wrong', '../assets/images/wrong.png');
         var correct = this.load.image('correct', '../assets/images/correct.png');
@@ -44,6 +43,7 @@ class Game extends Phaser.Scene {
 
     create() {
       console.log("running")
+      
 
 
       //X + = RIGHT / Y + = DOWN
@@ -51,6 +51,10 @@ class Game extends Phaser.Scene {
 
         //selectors 
 
+        player = prompt("Please enter a username", "name");
+        localStorage.setItem("playerName", player);
+        score = 600;
+        highscore = 0;
     
 
       //INVISIBLE SUSHI
@@ -79,7 +83,7 @@ class Game extends Phaser.Scene {
       this.gameSceneTitle = this.add.image(phaser.config.width / 2-220, phaser.config.height / 2-270, 'gameSceneTitle');
       this.gameSceneTitle.setOrigin(0.5);
 
-      this.pauseButton = this.add.image(phaser.config.width / 2-370, phaser.config.height / 2-270, 'pauseButton');
+      this.pauseButton = this.add.image(phaser.config.width / 2-370, phaser.config.height / 2-270, 'pauseButton').setInteractive();
       this.pauseButton.setOrigin(0.5);
       
       this.sushiList = this.add.image(phaser.config.width / 2-290, phaser.config.height / 2+110, 'sushiList');
@@ -105,8 +109,30 @@ class Game extends Phaser.Scene {
       this.selected5 = this.add.image(phaser.config.width /  2-370, phaser.config.height / 2+35, 'sushiSelected');
       this.selected6 = this.add.image(phaser.config.width /  2-276, phaser.config.height / 2-53, 'sushiSelected');
       this.selected7 = this.add.image(phaser.config.width /  2-370, phaser.config.height / 2-53, 'sushiSelected');
-     
 
+      //PAUSED GAME DISPLAY
+      
+
+      //PAUSE GAME
+
+      console.log(this.scene);
+
+ 
+      this.pauseButton.on('pointerdown', function(){
+            game.scene.pause();
+            console.log('paused');
+
+            if (game.scene.isSleeping('paused')){
+                game.scene.wake('paused');
+                game.scene.launch('paused');
+            }else{
+                game.scene.launch('paused');
+            }
+    
+      },)
+
+
+      
       //SUSHI ARRAY
       let sushiTypesSM = [this.nigiriSM, this.twoSushiSM, this.threeSushiSM, this.sixSushiSM, this.fishEggSM, this.sashimiSM, this.tamagoSM, this.wrappedNigiriSM  ];
       let sushiBoard = [this.nigiriSM, this.twoSushiSM, this.threeSushiSM, this.sixSushiSM, this.fishEggSM, this.sashimiSM, this.tamagoSM, this.wrappedNigiriSM  ];
@@ -141,20 +167,17 @@ class Game extends Phaser.Scene {
       this.sushi7 = this.add.image(phaser.config.width / 2-338, phaser.config.height / 2-22, sushi7).setInteractive();
 
       
- 
-
-      
-
       var newOrder = function(){
 
              //ORDER ITEMS
 
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * Math.floor(max));
-        }
+             
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
 
-        let randomSushiBucket = [];
-        while(randomSushiBucket.length <= 4) {
+    let randomSushiBucket = [];
+    while(randomSushiBucket.length <= 4) {
 
             let itemNumber = getRandomInt(7);
             console.log(itemNumber);
@@ -165,41 +188,94 @@ class Game extends Phaser.Scene {
             }
         }
 
+
         var sushiRandom1 = sushiTypesSM[randomSushiBucket[0]].texture.key;
         var sushiRandom2 = sushiTypesSM[randomSushiBucket[1]].texture.key;
         var sushiRandom3 = sushiTypesSM[randomSushiBucket[2]].texture.key;
         var sushiRandom4 = sushiTypesSM[randomSushiBucket[3]].texture.key;
+        
+
+
 
         game.add.image(phaser.config.width / 2+95, phaser.config.height / 2-220, sushiRandom1);
         game.add.image(phaser.config.width / 2+180, phaser.config.height / 2-220, sushiRandom2);
         game.add.image(phaser.config.width / 2+260, phaser.config.height / 2-220, sushiRandom3);
         game.add.image(phaser.config.width / 2+340, phaser.config.height / 2-220, sushiRandom4);
 
-        // game.correct.destroy(); 
-        // game.wrong.destroy(); 
-
-        // game.sushiRandom1.destroy(); 
-        // game.sushiRandom2.destroy(); 
-        // game.sushiRandom3.destroy(); 
-        // game.sushiRandom4.destroy(); 
-
-        // game.add.image(phaser.config.width / 2+95, phaser.config.height / 2-220, sushiRandom1);
-        // game.add.image(phaser.config.width / 2+180, phaser.config.height / 2-220, sushiRandom2);
-        // game.add.image(phaser.config.width / 2+260, phaser.config.height / 2-220, sushiRandom3);
-        // game.add.image(phaser.config.width / 2+340, phaser.config.height / 2-220, sushiRandom4);
 
         return;
 
        }
 
+       var destroyImages = function(){
+           
+        game.correct.destroy(true); 
+        game.wrong.destroy(true); 
+
+        game.sushiRandom1.destroy(true); 
+        game.sushiRandom2.destroy(true); 
+        game.sushiRandom3.destroy(true); 
+        game.sushiRandom4.destroy(true); 
+       }
+       
+
        newOrder();
+
+       var gameOver = function(){
+
+        console.log(score);
+        highscore = localStorage.getItem('highscore');
+        
+        if(highscore  === null) {    
+            localStorage.setItem('highscore', 0);   
+            highscore = 0;
+        }
+        else if(score > localStorage.getItem('highscore')){
+        
+        localStorage.setItem('highscore', highscore);
+        console.log("Game Over " + localStorage.getItem('highscore'));
+        
+            }
+        }
+
+        var checkAnswers = function(){
+            console.log();
+            
+        if (correct === 4 ){
+            console.log("WIN");
+            game.correct = game.add.image(phaser.config.width / 2+30, phaser.config.height / 2-218, 'correct');
+            score +=50;
+            scoreText.setText(score);
+            //destroyImages(); 
+            newOrder();
+
+            //randomise orders again
+    
+        }else {
+            console.log("LOSE");
+            game.wrong = game.add.image(phaser.config.width / 2+30, phaser.config.height / 2-218, 'wrong');
+           // destroyImages();
+            gameOver();
+            reset();
+            //delete images after 1second
+            //randomise orders again
+            
+        }
+        console.log(player + " highscore = " + localStorage.getItem('highscore'))
+    }
+
+    var reset = function(){
+        clicked = 0;
+        correct = 0;
+    }
+    
 
 
       //Select Sushi
 
       var clicked = 0;
       var correct = 0; 
-      var score = 0;
+      
       console.log(clicked);
       console.log(correct);
       
@@ -216,16 +292,7 @@ class Game extends Phaser.Scene {
 
       let timer = 5;
 
-      var timerText = this.add.text(phaser.config.width / 2-255, phaser.config.height / 2-165, timer, { font: "26px Arial", fill: "#7C0A02", align: "center" });
-
-    //   var toggleSelected = this.sushi0.on('pointerdown', function(){
-    //   if (this.selected0.angle = 45){
-    //       this.selected0.angle = 0;
-    //   } else if(this.selected0.angle = 0){
-    //       this.selected0.angle = 45;
-    //   }
-
-    //   }, this)
+      var timerText = this.add.text(phaser.config.width / 2-255, phaser.config.height / 2-165, timer, { font: "26px calibri", fill: "#7C0A02", align: "center" });
 
       
 
@@ -351,7 +418,7 @@ class Game extends Phaser.Scene {
      
 
         //set score text 
-        var scoreText = this.add.text(phaser.config.width / 2-260, phaser.config.height / 2-120, score, { font: "20px Arial", fill: "#ffff00", align: "center" });
+        var scoreText = this.add.text(phaser.config.width / 2-260, phaser.config.height / 2-120, this.score, { font: "20px calibri", fill: "#ffff00", align: "center" });
         
 
       this.bellServe.on('pointerdown', function() {
@@ -361,7 +428,7 @@ class Game extends Phaser.Scene {
           if (nigiriClicked != true){
               console.log("not selected")
   
-          }else if(nigiriClicked != false && sushi0 === sushiRandom1 || sushi0 === sushiRandom2 || sushi0 === sushiRandom3 || sushi0 === sushiRandom4){
+          }else if(nigiriClicked != false && sushi0 === game.sushiRandom1 || sushi0 === game.sushiRandom2 || sushi0 === game.sushiRandom3 || sushi0 === game.sushiRandom4){
               console.log("correct");
               correct++;
   
@@ -373,7 +440,7 @@ class Game extends Phaser.Scene {
           if (twoSushiClicked != true){
               console.log("not selected")
   
-          }else if(twoSushiClicked != false && sushi1 === sushiRandom1 || sushi1 === sushiRandom2 || sushi1 === sushiRandom3 || sushi1 === sushiRandom4){
+          }else if(twoSushiClicked != false && sushi1 === game.sushiRandom1 || sushi1 === game.sushiRandom2 || sushi1 === game.sushiRandom3 || sushi1 === game.sushiRandom4){
               console.log("correct");
               correct++;
               
@@ -385,7 +452,7 @@ class Game extends Phaser.Scene {
           if (threeSushiClicked != true){
               console.log("not selected")
   
-          }else if(threeSushiClicked != false && sushi2 === sushiRandom1 || sushi2 === sushiRandom2 || sushi2 === sushiRandom3 || sushi2 === sushiRandom4){
+          }else if(threeSushiClicked != false && sushi2 === game.sushiRandom1 || sushi2 === game.sushiRandom2 || sushi2 === game.sushiRandom3 || sushi2 === game.sushiRandom4){
               console.log("correct");
               correct++;
               
@@ -396,7 +463,7 @@ class Game extends Phaser.Scene {
           if (sixSushiClicked != true){
               console.log("not selected")
   
-          }else if(sixSushiClicked != false && sushi3 === sushiRandom1 || sushi3 === sushiRandom2 || sushi3 === sushiRandom3 || sushi3 === sushiRandom4){
+          }else if(sixSushiClicked != false && sushi3 === game.sushiRandom1 || sushi3 === game.sushiRandom2 || sushi3 === game.sushiRandom3 || sushi3 === game.sushiRandom4){
               console.log("correct");
               correct++;
               
@@ -407,7 +474,7 @@ class Game extends Phaser.Scene {
           if (fishEggClicked != true){
               console.log("not selected")
   
-          }else if(fishEggClicked != false && sushi4 === sushiRandom1 || sushi4 === sushiRandom2 || sushi4 === sushiRandom3 || sushi4 === sushiRandom4){
+          }else if(fishEggClicked != false && sushi4 === game.sushiRandom1 || sushi4 === game.sushiRandom2 || sushi4 === game.sushiRandom3 || sushi4 === game.sushiRandom4){
               console.log("correct");
               correct++;
               
@@ -419,7 +486,7 @@ class Game extends Phaser.Scene {
           if (sashimiClicked != true){
               console.log("not selected")
   
-          }else if(sashimiClicked != false && sushi5 === sushiRandom1 || sushi5 === sushiRandom2 || sushi5 === sushiRandom3 || sushi5 === sushiRandom4){
+          }else if(sashimiClicked != false && sushi5 === game.sushiRandom1 || sushi5 === game.sushiRandom2 || sushi5 === game.sushiRandom3 || sushi5 === game.sushiRandom4){
               console.log("correct");
               correct++;
               
@@ -431,7 +498,7 @@ class Game extends Phaser.Scene {
           if (tamagoClicked != true){
               console.log("not selected")
   
-          }else if(tamagoClicked != false && sushi6 === sushiRandom1 || sushi6 === sushiRandom2 || sushi6 === sushiRandom3 || sushi6 === sushiRandom4){
+          }else if(tamagoClicked != false && sushi6 === game.sushiRandom1 || sushi6 === game.sushiRandom2 || sushi6 === game.sushiRandom3 || sushi6 === game.sushiRandom4){
               console.log("correct");
               correct++;
               
@@ -442,7 +509,7 @@ class Game extends Phaser.Scene {
           if (wrappedNigiriClicked != true){
               console.log("not selected")
   
-          }else if(wrappedNigiriClicked != false && sushi7 === sushiRandom1 || sushi7 === sushiRandom2 || sushi7 === sushiRandom3 || sushi7 === sushiRandom4){
+          }else if(wrappedNigiriClicked != false && sushi7 === game.sushiRandom1 || sushi7 === game.sushiRandom2 || sushi7 === game.sushiRandom3 || sushi7 === game.sushiRandom4){
               console.log("correct");
               correct++;
               
@@ -544,43 +611,11 @@ class Game extends Phaser.Scene {
       }, this )
 
       
-
-
-        var checkAnswers = function(){
-            console.log();
-            
-        if (correct === 4 ){
-            console.log("WIN");
-            game.correct = game.add.image(phaser.config.width / 2+30, phaser.config.height / 2-218, 'correct');
-            score +=50;
-            scoreText.setText(score);
-            //delete images after 1second 
-            
-            newOrder();
-
-            //randomise orders again
-    
-        }else {
-            console.log("LOSE");
-            game.wrong = game.add.image(phaser.config.width / 2+30, phaser.config.height / 2-218, 'wrong');
-            
-            newOrder();
-            //delete images after 1second
-            //randomise orders again
-            
-        }
+       
+      
 
     
-     
-
-
-        
-        clicked = 0;
-        correct = 0;
-        console.log(correct)
-        console.log(clicked)
-        console.log("Score = " + score);
-    }
+    
 
     }
 }
